@@ -6,6 +6,10 @@ import B from '@/components/router-base/b'
 import NotPage from '@/components/404'
 import Home from '@/components/home'
 
+import Container from '@/components/jineng/container.vue'
+import ContainerList from '@/components/jineng/container-list.vue'
+import Detail from '@/components/jineng/detail.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -43,7 +47,24 @@ export default new Router({
             path: '/b',
             name: 'b',
             component: B
-          },
+          }
+      ]
+    },
+    {
+      path: '/container',
+      name: 'container',
+      component: Container,
+      children: [
+        {
+          path: '/containerList',
+          name: 'containerList',
+          component: ContainerList
+        },
+        {
+          path: '/detail',
+          name: 'detail',
+          component: Detail
+        }
       ]
     }
   ]

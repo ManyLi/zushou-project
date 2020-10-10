@@ -7,7 +7,7 @@
         <button @click="toBcom">query跳转到b组件</button><br>
         <button @click="toBN">name跳转到b组件</button>
 
-        <a-child></a-child>
+        <a-child :toChild="test" @child-parent-func="getChildFunc"></a-child>
     </div>
 </template>
 
@@ -24,6 +24,9 @@ export default {
         }
     },
     methods: {
+        getChildFunc (data) {
+            console.log(data)
+        },
         toBcom () {
             console.log(this.$router)
             //通过path&query跳转

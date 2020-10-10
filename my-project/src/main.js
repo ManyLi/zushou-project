@@ -7,6 +7,9 @@ import router from './router'
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
+  console.log('to', to)
+  console.log('from', from)
+  console.log('next', next)
   if (sessionStorage.getItem('userInfo')) {
     next()
   } else {
