@@ -6,6 +6,15 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  if (sessionStorage.getItem('userInfo')) {
+    next()
+  } else {
+    sessionStorage.setItem('userInfo', '123')
+    next({path: '/404'})
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
