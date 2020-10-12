@@ -6,7 +6,7 @@
         </div>
 
         <ul class="content-box">
-            <li v-for="(item, index) in newContentData" :key="index" @click="toDetail">
+            <li v-for="(item, index) in newContentData" :key="index" @click="toDetail(item)">
                 <div class="title">{{item.title}}</div>
                 <div>{{item.name}} 发布于：{{item.updateTime}}</div>
                 <div class="item-icon"></div>
@@ -26,6 +26,8 @@ export default {
     },
     methods: {
         toDetail (data) {
+            let
+
             this.$router.push({path: '/detail', query: data})
         }
     },
