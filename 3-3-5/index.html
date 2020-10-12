@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page-title">文章管理</div>
+
+        <ul class="page-tab">
+            <li>文章列表</li>
+            <li>文章编写</li>
+            <li>文章分类</li>
+        </ul>
+
+        <div class="search-box">
+            <div class="input-icon"></div>
+            <input type="text">
+        </div>
+
+        <ul class="content-box">
+            <!-- <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li>
+            <li>
+                <div class="title">关于本站</div>
+                <div>管理员 发布于：2019-05-01 14:05:05</div>
+                <div class="item-icon"></div>
+            </li> -->
+        </ul>
+
+        <ul class="footer">
+            <li>
+                <div class="icon"></div>
+                <div>文章管理</div>
+            </li>
+            <li>
+                <div class="icon"></div>
+                <div>文章管理</div>
+            </li>
+            <li>
+                <div class="icon"></div>
+                <div>文章管理</div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./data.js"></script>
+    <script>
+
+        window.onload = function () {
+            let contentBox = document.getElementsByClassName('content-box')[0]
+
+            console.log(contentBox)
+
+            contentData.forEach((item, index) => {
+                // console.log(item)
+                let li = document.createElement('li')
+                let title = document.createElement('div')
+                let user = document.createElement('div')
+                let icon = document.createElement('div')
+
+                title.className = 'title'
+                title.innerHTML = item.title
+
+                user.innerHTML = item.userName + ' 发布于：' + item.updateTime
+
+                icon.className = 'item-icon'
+
+                li.appendChild(title)
+                li.appendChild(user)
+                li.appendChild(icon)
+
+                console.log(li)
+
+                contentBox.appendChild(li)
+
+                li.onclick = e => {
+                    window.location.href = './detail.html?id=' + item.id
+                }
+            })
+
+            let tabs = document.querySelectorAll('.page-tab li')
+
+            tabs.forEach(item => {
+                item.onclick = e => {
+                    tabs.forEach(resetItem => {
+                        resetItem.style.background = '#ffffff'
+                        resetItem.style.color = '#333333'
+                    })
+
+                    e.target.style.background = 'blue'
+                    e.target.style.color = 'white'
+
+                }
+            })
+        }
+    </script>
+</body>
+</html>
