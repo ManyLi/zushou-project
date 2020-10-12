@@ -36,12 +36,22 @@ export default {
     data () {
         return {
             tabList: ['文章列表', '文章编写', '文章分类'],
-            currentTab: 0
+            currentTab: 0,
+            btnVisible: false
         }
     },
     methods: {
         tabClick (index) {
             this.currentTab = index
+        }
+    },
+    watch: {
+        $route (route) {
+            if (route.push === '/containerList') {
+                this.btnVisible = false
+            } else {
+                this.btnVisible = true
+            }
         }
     }
 }

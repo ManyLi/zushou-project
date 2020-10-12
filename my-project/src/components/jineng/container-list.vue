@@ -6,64 +6,34 @@
         </div>
 
         <ul class="content-box">
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
-                <div class="item-icon"></div>
-            </li>
-            <li>
-                <div class="title">关于本站111111111</div>
-                <div>管理员 发布于：2019-05-01 14:05:05</div>
+            <li v-for="(item, index) in newContentData" :key="index" @click="toDetail">
+                <div class="title">{{item.title}}</div>
+                <div>{{item.name}} 发布于：{{item.updateTime}}</div>
                 <div class="item-icon"></div>
             </li>
         </ul>
     </div>
 </template>
+
+<script>
+import { contentData, detailList } from './data'
+
+export default {
+    data () {
+        return {
+            newContentData: contentData
+        }
+    },
+    methods: {
+        toDetail (data) {
+            this.$router.push({path: '/detail', query: data})
+        }
+    },
+    mounted(){
+        console.log(contentData);
+    }
+}
+</script>
 
 <style scoped>
 

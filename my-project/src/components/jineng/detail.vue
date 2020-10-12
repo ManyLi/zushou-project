@@ -2,9 +2,9 @@
     <div>
         <div class="container">
             <div class="page-title">
-                <span class="goBack">返回</span>
+                <span class="goBack" @click="goBack">返回</span>
                 <span>文章管理</span>
-                <span class="save">保存</span>
+                <span class="save" @click="save">保存</span>
             </div>
 
             <ul class="page-tab">
@@ -48,7 +48,24 @@
 
 <script>
 export default {
-    
+    data () {
+        return {}
+    },
+    mounted () {
+        console.log('aaaa', this.$route.query)
+    },
+    methods: {
+        goBack () {
+            // this.$router.push({path: '/containerList'})
+
+            this.$router.go(-1)
+        },
+        save () {
+            // this.$router.push({path: '/containerList'})
+
+            this.$router.go(-1)
+        }
+    }
 }
 </script>
 

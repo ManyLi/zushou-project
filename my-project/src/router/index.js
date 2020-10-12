@@ -56,8 +56,8 @@ export default new Router({
       component: Container,
       children: [
         {
-          path: '/containerlist',
-          name: 'containerlist',
+          path: '/containerList',
+          name: 'containerList',
           component: ContainerList
         },
         {
