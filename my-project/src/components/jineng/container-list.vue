@@ -26,8 +26,6 @@ export default {
     },
     methods: {
         toDetail (data) {
-            let
-
             this.$router.push({path: '/detail', query: data})
         }
     },
