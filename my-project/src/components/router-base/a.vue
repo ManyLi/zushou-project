@@ -23,6 +23,9 @@ export default {
             test: '传入组件内的参数'
         }
     },
+    mounted () {
+        console.log(this.$store.state)
+    },
     methods: {
         getChildFunc (data) {
             console.log(data)
