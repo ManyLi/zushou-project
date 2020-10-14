@@ -14,6 +14,9 @@ import Comm1 from '@/components/vuex&store/comm1.vue'
 import Comm2 from '@/components/vuex&store/comm2.vue'
 import ShopingCar from '@/components/vuex&store/shoping-car.vue'
 
+import Other from '@/components/element/other.vue'
+import Login from '@/components/xingzou/login.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -40,18 +43,18 @@ export default new Router({
       name: 'home',
       component: Home,
       children: [
-          {
-            path: '/a',
-            //别名
-            // alias: '/aca',
-            name: 'a',
-            component: A
-          },
-          {
-            path: '/b',
-            name: 'b',
-            component: B
-          }
+        {
+          path: '/a',
+          //别名
+          // alias: '/aca',
+          name: 'a',
+          component: A
+        },
+        {
+          path: '/b',
+          name: 'b',
+          component: B
+        }
       ]
     },
     {
@@ -85,6 +88,16 @@ export default new Router({
       path: '/shoping-car',
       name: 'shoping-car',
       component: ShopingCar,
+    },
+    {
+      path: '/other',
+      name: 'other',
+      component: Other,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })
