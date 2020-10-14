@@ -1,5 +1,13 @@
 <template>
-    <div>
-        这是usermanage页面
-    </div>
+  <div>
+    这是usermanager页面
+  </div>
 </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style></style>

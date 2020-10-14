@@ -4,10 +4,10 @@
             <div class="form-title">请登录</div>
             <el-form ref="formData" :model="formData" :rules="rules">
                 <el-form-item prop="userName">
-                    <el-input placeholder="请输入用户名" type="text" v-model="formData.userName"></el-input>
+                    <el-input placeholder="请输入用户名" type="text" v-model="formData.userName" @keyup.enter.native="login"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input placeholder="请输入密码" type="password" v-model="formData.password"></el-input>
+                    <el-input placeholder="请输入密码" type="password" v-model="formData.password" @keyup.enter.native="login"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button :loading="loginLoading" type="primary" @click="login">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
