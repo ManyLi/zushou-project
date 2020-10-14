@@ -2,7 +2,7 @@
     <div class="container">
         <div class="form-box">
             <div class="form-title">请登录</div>
-            <el-form :model="formData" :rules="rules">
+            <el-form ref="formData" :model="formData" :rules="rules">
                 <el-form-item prop="userName">
                     <el-input placeholder="请输入用户名" type="text" v-model="formData.userName"></el-input>
                 </el-form-item>
@@ -10,7 +10,7 @@
                     <el-input placeholder="请输入密码" type="password" v-model="formData.password"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submit">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
+                    <el-button :loading="loginLoading" type="primary" @click="login">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -23,23 +23,58 @@ import $ from 'jquery'
 export default {
     data() {
       return {
+        loginLoading: false,
         formData: {
           userName: '',
           password: ''
         },
         rules: {
             userName:[
-                { required: true, message: '请填写用户名', trigger: 'blur' }
+                { required: true, trigger: 'change', message: '请填写用户名'}
             ],
             password:[
-                { required: true, message: '请填写密码', trigger: 'blur' }
+                { required: true, trigger: 'change', message: '请填写密码'}
             ]
         }
       }
     },
     methods: {
-        submit () {
-            console.log('success')
+        login () {
+            this.$refs.formData.validate(valid => {
+                if (valid) {
+                    this.loginLoading = true
+
+                    $.ajax({
+                        url: 'http://192.168.3.77:3000/api/demo/login',
+                        method: 'post',
+                        data: this.formData,
+                        dataType: 'json',
+                        success: (data) => {
+                            setTimeout(() => {
+                                this.loginLoading = false
+
+                                console.log('data', data)
+                                if (data.status === 200) {
+                                    this.$message({
+                                        type: 'success',
+                                        message: data.message
+                                    })
+
+                                    this.$router.push({path: '/userManage'})
+                                } else {
+                                    this.$message({
+                                        type: 'error',
+                                        message: data.message
+                                    })
+                                }
+                            }, 500)
+                        }
+                    })
+                    console.log('发请求')
+                } else {
+                    return false
+                }
+            })
         }
     }
 }
