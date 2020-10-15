@@ -16,20 +16,25 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">查询</el-button>
+                    <el-button type="primary" @click="fetch">查询</el-button>
                     <el-button type="primary" @click="seset">重置</el-button>
                 </el-form-item>
 
                 <div class="btn-group">
                     <el-button>新增</el-button>
                     <el-button>修改</el-button>
-                    <el-button>删除</el-button>
+                    <el-button @click="deleteRows">删除</el-button>
                 </div>
 
-                <el-table :data="tableData">
+                <el-table :data="tableData" @selection-change="selectionChange">
+                    <el-table-column type="selection"></el-table-column>
                     <el-table-column prop="account" label="账号"></el-table-column>
                     <el-table-column prop="name" label="姓名"></el-table-column>
-                    <el-table-column prop="role" label="角色"></el-table-column>
+                    <el-table-column prop="role" label="角色">
+                        <template slot-scope="scope">
+                            <span>{{ scope.row.role === '1' ? '管理员' : scope.row.role === '2' ? '店长' : '司机'}}</span>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="gender" label="性别"></el-table-column>
                     <el-table-column prop="phone" label="手机"></el-table-column>
                     <el-table-column prop="email" label="邮箱"></el-table-column>
@@ -66,14 +71,63 @@ export default {
                 pageIndex: 1,
                 pageSize: 3,
                 total: 0
-            }
+            },
+            tableCheckedRows: []
         }
     },
     mounted () {
         // console.log($)
-        this.search()
+        this.fetch()
     },
     methods: {
+        selectionChange (rows) {
+            console.log(rows)
+            this.tableCheckedRows = rows
+        },
+        deleteRows () {
+            if (!this.tableCheckedRows.length) {
+                this.$message({
+                    type: 'info',
+                    message: '请勾选要删除的数据'
+                })
+
+                return
+            }
+
+            let ids = this.tableCheckedRows.map(item => {
+                return item.id
+            }).toString()
+
+            $.ajax({
+                url: 'http://192.168.3.77:3000/api/demo/delete',
+                method: 'get',
+                data: {ids: ids},
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+
+                    if (res.data) {
+                        this.$message({
+                            type: 'success',
+                            message: res.message
+                        })
+
+                        this.fetch()
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        })
+                    }
+                }
+            })
+        },
+        fetch () {
+            this.pageInfo.pageIndex = 1
+            this.pageInfo.pageSize = 3
+
+            this.search()
+        },
         search () {
             $.ajax({
                 url: 'http://192.168.3.77:3000/api/demo/searchList',
@@ -90,9 +144,14 @@ export default {
         },
         seset () {
             this.$refs.form.resetFields()
+
+            this.fetch()
         },
         handleSizeChange (value) {
             console.log('111', value)
+            this.pageInfo.pageSize = value
+
+            this.search()
         },
         handleCurrentChange (value) {
             this.pageInfo.pageIndex = value
