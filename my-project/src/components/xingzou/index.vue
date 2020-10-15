@@ -10,7 +10,7 @@
 
         <div class="main">
             <ul class="aside">
-                <li :class="{active: item.path === currentRoute}" v-for="(item, index) in menuList" :key="index">{{item.menuName}}</li>
+                <li :class="{active: item.path === currentRoute}" v-for="(item, index) in menuList" :key="index" @click="to(item.path)">{{item.menuName}}</li>
             </ul>
 
             <div class="content">
@@ -40,6 +40,11 @@ export default {
     computed: {
         currentRoute () {
             return this.$route.path
+        }
+    },
+    methods: {
+        to (path) {
+            this.$router.push({path: path})
         }
     }
 }

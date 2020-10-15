@@ -39,11 +39,11 @@
                 <el-pagination
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"
-                    :current-page="currentPage"
-                    :page-sizes="[100, 200, 300, 400]"
-                    :page-size="100"
+                    :current-page="pageInfo.pageIndex"
+                    :page-sizes="[3, 5, 7]"
+                    :page-size="pageInfo.pageSize"
                     layout="total, sizes, prev, pager, next, jumper"
-                    :total="400">
+                    :total="pageInfo.total">
                 </el-pagination>
             </el-form>
         </div>
@@ -61,14 +61,33 @@ export default {
                 userAccount: '',
                 role: ''
             },
-            currentPage: 1,
-            tableData: []
+            tableData: [],
+            pageInfo: {
+                pageIndex: 1,
+                pageSize: 3,
+                total: 0
+            }
         }
     },
     mounted () {
-        console.log($)
+        // console.log($)
+        this.search()
     },
     methods: {
+        search () {
+            $.ajax({
+                url: 'http://192.168.3.77:3000/api/demo/searchList',
+                method: 'get',
+                data: Object.assign({}, this.pageInfo, this.searchFormData),
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.tableData = res.data
+
+                    this.pageInfo.total = res.total
+                }
+            })
+        },
         seset () {
             this.$refs.form.resetFields()
         },
@@ -76,6 +95,9 @@ export default {
             console.log('111', value)
         },
         handleCurrentChange (value) {
+            this.pageInfo.pageIndex = value
+
+            this.search()
             console.log('222', value)
         }
     }
