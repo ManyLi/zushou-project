@@ -34,7 +34,7 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       //重定向
-      // redirect: '/a',
+      redirect: '/userManage',
       component: HelloWorld
     },
     {
