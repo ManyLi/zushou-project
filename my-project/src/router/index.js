@@ -16,7 +16,10 @@ import ShopingCar from '@/components/vuex&store/shoping-car.vue'
 
 import Other from '@/components/element/other.vue'
 import Login from '@/components/xingzou/login.vue'
-import UserManage from '@/components/xingzou/user-manage.vue'
+
+import Index from '@/components/xingzou/index.vue'
+import UserManage from '@/components/xingzou/manage/user-manage.vue'
+import MenuManage from '@/components/xingzou/manage/menu-manage.vue'
 
 Vue.use(Router)
 
@@ -101,9 +104,21 @@ export default new Router({
       component: Login
     },
     {
-      path: '/userManage',
-      name: 'userManage',
-      component: UserManage
+      path: '/index',
+      name: 'index',
+      component: Index,
+      children: [
+        {
+          path: '/userManage',
+          name: 'userManage',
+          component: UserManage
+        },
+        {
+          path: '/menuManage',
+          name: 'menuManage',
+          component: MenuManage
+        }
+      ]
     }
   ]
 })
